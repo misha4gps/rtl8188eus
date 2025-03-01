@@ -1840,6 +1840,7 @@ int rm_radio_meas_report_cond(struct rm_obj *prm)
 		case ch_load_cond_anpi_equal_greater:
 			if (val8 >= prm->q.opt.clm.rep_cond.threshold)
 				return _SUCCESS;
+			break;
 		case ch_load_cond_anpi_equal_less:
 			if (val8 <= prm->q.opt.clm.rep_cond.threshold)
 				return _SUCCESS;

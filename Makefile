@@ -28,10 +28,10 @@ EXTRA_LDFLAGS += --strip-debug
 
 CONFIG_AUTOCFG_CP = n
 
-RHEL_VER := $(shell echo `grep '^ID_LIKE'  /etc/os-release |grep -qi 'fedora' && grep '^VERSION_ID' /etc/os-release | cut -d'"' -f2`)
+RHEL_VER := $(shell echo `grep '^ID_LIKE'  /etc/os-release |grep -qi 'fedora' && grep '^VERSION_ID' /etc/os-release | cut -d'"' -f2 | awk -F. '{printf("%02d%02d", $$1, $$2)}'`)
 ifdef RHEL_VER
 EXTRA_CFLAGS += -DRHEL8
-ifeq (${RHEL_VER},9.5)
+ifeq ($(shell test $(RHEL_VER) -ge 0905; echo $$?),0)
 EXTRA_CFLAGS += -DRHEL95
 endif
 endif
